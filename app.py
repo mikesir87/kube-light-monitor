@@ -91,7 +91,9 @@ for event in w.stream(v1.list_namespaced_pod, namespace = "default"):
     if podId in deletingPods: deletingPods.remove(podId)
 
     if event["type"] != "DELETED":
-        if pod.status.phase == "Pending":
+        if pod.metadata.deletion_timestamp is not None:
+            deletingPods.append(podId)
+        elif pod.status.phase == "Pending":
             if (pod.status.container_statuses is not None and 
                     pod.status.container_statuses[0].state is not None and 
                     pod.status.container_statuses[0].state.waiting is not None and 
@@ -99,8 +101,6 @@ for event in w.stream(v1.list_namespaced_pod, namespace = "default"):
                 failedPods.append(podId)
             else:
                 pendingPods.append(podId)
-        elif pod.metadata.deletion_timestamp is not None:
-            deletingPods.append(podId)
         elif pod.status.phase == "Running":
             runningPods.append(podId)
     updateLights()
