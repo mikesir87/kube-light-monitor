@@ -4,6 +4,7 @@ This project was a fun experiment to get some hands-on experience with creating 
 
 ### Links 
 
+- [Tweet with video of it in action](https://twitter.com/mikesir87/status/1239519247648292864)
 - [Blog post detailing the project](http://blog.mikesir87.io/2020/04/creating-kubernetes-monitor-with-blinksticks/)
 - [Buy your own BlinkSticks!](https://www.blinkstick.com/)
 
